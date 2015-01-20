@@ -1,5 +1,4 @@
 require 'mandrill'
-
 class MailService
   API_KEY = ENV["MANDRILL_APIKEY"]
   SENDER_NAME = ENV["SENDER_NAME"]
@@ -20,11 +19,13 @@ class MailService
   def self.create_message(from, content)
     message = {
       :subject => "[www.mst.org.br] Pergunta enviada pelo site",
-      :headers => { "Reply-To"=> from},
-      :html => "<html><h3>Mensagem enviada pelo site:</h3> <br/> <p>#{message}</p></html>",
+      :headers => {
+        "Reply-To" => from.to_s
+      },
+      :html => "<html><h3>Pergunta de <strong>#{from}</strong></h3> <br/><p>#{content}</p></html>",
       :text =>  content,
-      :from_name => SENDER_NAME,
       :to => [CONTACT_INFO],
+      :from_name => SENDER_NAME,
       :from_email=> SENDER_EMAIL
     }
   end

@@ -6,6 +6,6 @@ gem 'mandrill-api'
 
 group :development do
   gem 'byebug'
-  gem 'dotenv'
+  gem 'foreman'
 end
 
